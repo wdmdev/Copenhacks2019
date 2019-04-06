@@ -2,14 +2,10 @@ import numpy as np
 import os, requests, time
 from xml.etree import ElementTree
 import playsound as ps
-import json
+import settings
 
-subscription_key = ''
+subscription_key = settings.getSetting('sub_key')
 access_token = ''
-
-with open('./config.json', 'r') as settings:
-    subscription_key = json.loads(settings.read())['sub_key']
-
 
 def __get_token():
     fetch_token_url = "https://northeurope.api.cognitive.microsoft.com/sts/v1.0/issuetoken"
