@@ -9,7 +9,7 @@ Created on Sat Apr  6 23:22:15 2019
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
-chatbot = ChatBot('KingKimBot')
+chatbot = ChatBot('Ron Obvious')
 
 # Create a new trainer for the chatbot
 trainer = ChatterBotCorpusTrainer(chatbot)
@@ -18,4 +18,4 @@ trainer = ChatterBotCorpusTrainer(chatbot)
 trainer.train("chatterbot.corpus.english")
 
 # Get a response to an input statement
-chatbot.get_response("Hello, would you like to talk about north korea and microsoft?")
+chatbot.get_response("Hello, how are you today?")
