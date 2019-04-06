@@ -38,7 +38,7 @@ def getWikiData(freq_keyword,all_keywords,version):
 def covarianceDocKey(document,keywords):
     #Get the keyphrases
     #I need the counts from the first input
-    random_genKeyCount = np.ones((16))
+    random_genKeyCount = np.ones(len(keywords))
 #    random_genKeyCount =np.array([random.randrange(1, 5, 1) for _ in range(16)])
     words = document.split(" ")
     keyword_count = np.zeros((len(keywords)))
@@ -52,7 +52,7 @@ def most_freq_keyword(keywords):
     max_counts = np.sort(count)[::-1]
 
     new_keywords = []
-    for i in range(3):
+    for i in range(len(keywords)):
 #        i.append(np.where(max_counts[i]==count))
         index = np.where(max_counts[i]==count)[0]
 

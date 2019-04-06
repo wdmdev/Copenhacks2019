@@ -67,11 +67,14 @@ HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".
 
 # Send information to Kim
 k_ph = key_phrases["documents"][0]["keyPhrases"]
-top_keywords = getWikiData.most_freq_keyword(k_ph)
-top_doc = getWikiData.getWikiData(top_keywords, k_ph,1)
+
+if len(k_ph) > 0:
+    top_keywords = getWikiData.most_freq_keyword(k_ph)
+    top_doc = getWikiData.getWikiData(top_keywords, k_ph,1)
 
 # Recieve information from Kim
-Question.GenerateQuestion(top_keywords, top_doc)
+if top_doc != '':
+    Question.GenerateQuestion(top_keywords, top_doc)
 
 # Elaborate, evaluate and start conversation
 
