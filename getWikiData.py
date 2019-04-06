@@ -11,11 +11,11 @@ import wikipedia as wiki
 
 def getWikiData(freq_keyword,all_keywords,version):
     if version == 1:
-        prKeyword =3 
+        prKeyword =3
         wikiPages = []
         for i in freq_keyword:
             wikiPages.append(wiki.search(i,results=prKeyword))
-        
+
         bestMatch = {"row":0,"column":0,"word":'hi'}
         maximum = 0
         for i in range(len(freq_keyword)):
@@ -26,7 +26,7 @@ def getWikiData(freq_keyword,all_keywords,version):
                     if current_co > maximum:
                         maximum = current_co
                         bestMatch['row'],bestMatch['column'],bestMatch['word'] = i,j,wikiPages[bestMatch['row']][bestMatch['column']]
-                        
+
                 except:
                     continue
         print('Title of best match: ',bestMatch['word'])
@@ -37,20 +37,16 @@ def getWikiData(freq_keyword,all_keywords,version):
 
 def covarianceDocKey(document,keywords):
     #Get the keyphrases
-    #I need the counts from the first input 
+    #I need the counts from the first input
     random_genKeyCount = np.ones((16))
 #    random_genKeyCount =np.array([random.randrange(1, 5, 1) for _ in range(16)])
     words = document.split(" ")
     keyword_count = np.zeros((len(keywords)))
     for i,word in enumerate(words):
         if word in keywords:
-            keyword_count[keywords.index(word)]+=1    
+            keyword_count[keywords.index(word)]+=1
     return np.matmul(keyword_count,random_genKeyCount.T)
-            
-            
 
-        
-    
 def most_freq_keyword(keywords):
     words, count = np.unique(keywords, return_counts=True)
     max_counts = np.sort(count)[::-1]
@@ -59,7 +55,7 @@ def most_freq_keyword(keywords):
     for i in range(3):
 #        i.append(np.where(max_counts[i]==count))
         index = np.where(max_counts[i]==count)[0]
-        
+
         n = 0
         while n < len(index):
             if words[index[n]] not in new_keywords:
@@ -68,12 +64,13 @@ def most_freq_keyword(keywords):
                 break
             n+= 1
     return new_keywords
-#keywords = ['dog','dog','cat','dog','c','dog','r','e','q','e','q','p']
-keywords = ["evolution of dogs","instincts","distinct breeds","humans","new breeds","distinct societal needs","hunters","keen senses of sight","major role","rudimentary form of genetic engineering","gray wolf","earliest encounters","Human beings","smell","desire","details"]
-freq_keywords = most_freq_keyword(keywords)
 
-#version 0 = simple, no covariance between keywords and documents. version = 1, covariance is calculated.
-version = 1
-docs = getWikiData(freq_keywords,keywords,version)
-print(docs)
+##keywords = ['dog','dog','cat','dog','c','dog','r','e','q','e','q','p']
+#keywords = ["evolution of dogs","instincts","distinct breeds","humans","new breeds","distinct societal needs","hunters","keen senses of sight","major role","rudimentary form of genetic engineering","gray wolf","earliest encounters","Human beings","smell","desire","details"]
+#freq_keywords = most_freq_keyword(keywords)
+#
+##version 0 = simple, no covariance between keywords and documents. version = 1, covariance is calculated.
+#version = 1
+#docs = getWikiData(freq_keywords,keywords,version)
+#print(docs)
 
