@@ -171,6 +171,8 @@ whlie KimActive == True:
                 Question.GenerateNegativeElaboration():
             else:
                 break
+
+Question.GenerateAppraise()
                 
     
 
