@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Apr  6 15:35:49 2019
+
+@author: Yssubhi
+"""
+
 import azure.cognitiveservices.speech as speechsdk
 import time
 import requests
@@ -136,7 +144,7 @@ with open (txtfile, "r") as readtext:
     txtdata=readtext.readlines()    
     
 numWords = len(txtdata.split())
-i = 10
+i = 1
 
 if numWords >= 100:
     if SCKR.precision >= 0.5:
@@ -156,6 +164,14 @@ whlie KimActive == True:
     # get new question
     if top_doc != '':
         Question.GenerateQuestion(top_keywords, top_doc)
+    i = 1 + i
+    # evaluate perfermance and elaborate if precision is below 10 percent.
+        while i > 1:
+            if SCKR.precision <= 0.1:
+                Question.GenerateNegativeElaboration():
+            else:
+                break
+                
     
 
 # Elaborate, evaluate and start conversation
@@ -192,3 +208,4 @@ txtfile = open(top_doc + ".txt","w+")
 
 with open(txtfile) as appendtext:
     appendtext.write(KimConversation)
+    
