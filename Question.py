@@ -21,13 +21,19 @@ def __get_token():
     return str(response.text)
 
 def __chooseQuestionWord(pageTitle, keywords):
-    sections = [s for s in wiki.page(pageTitle).sections]
-    sectionTitles = [s.title for s in sections if any(k in s.text for k in keywords)]
-    return sectionTitles[np.random.randint(0,len(sectionTitles)-1)] if len(sectionTitles) > 0 else keywords[0]
+    sections = [s.title for s in wiki.page(pageTitle).sections]
+    return sections[0]
+    # if len(sections) == 0:
+        #     return keywords[0]
+        # elif len(sections) == 1:
+            #     return sections[0]
+            # else:
+                #     return sections[np.random.randint(0,len(sections)-1)]
 
 def GenerateQuestion(pageTitle, keywords):
-    question = RG.question_format.format(
-        __chooseQuestionWord(pageTitle, keywords), pageTitle)
+    #question = 'Could you explain the {0} of {1} to me?'.format(__chooseQuestionWord(pageTitle, keywords), pageTitle)
+    pageTitle = list(pageTitle.keys())[0] 
+    question = 'Could you explain the ' + __chooseQuestionWord(pageTitle, keywords) + ' of ' + pageTitle + ' to me?'
     access_token = __get_token()
     timestr = time.strftime("%Y%m%d-%H%M")
 
@@ -49,7 +55,6 @@ def GenerateQuestion(pageTitle, keywords):
     body = ElementTree.tostring(xml_body)
 
     response = requests.post(constructed_url, headers=headers, data=body)
-    print(response.content)
     if response.status_code == 200:
         path = 'sample-' + timestr + '.wav'
         with open(path, 'wb') as audio:
@@ -92,7 +97,7 @@ def GenerateNegativeElaboration():
 
 def GenerateAppraise():
     appraise = RG.appraise_format
-    
+
     base_url = 'https://northeurope.tts.speech.microsoft.com/'
     path = 'cognitiveservices/v1'
     constructed_url = base_url + path

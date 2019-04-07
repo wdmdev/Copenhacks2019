@@ -9,7 +9,7 @@ Created on Sun Apr  7 09:47:30 2019
 import random
 
 rand_q  = ['''Could you explain the {0} of {1} to me?''',
-           '''That sounds interesting. I would like to know more about {0} of {1}Q''',
+           '''That sounds interesting. I would like to know more about {0} of {1}''',
            '''{0}? What an exciting topic! Explain {0} of {1} to me?''',
            '''Never thought about {0} of {1}! Tell me more!''',
            '''Wuaw, {0} of {1}? So much to learn. Hit me!''']

@@ -1,6 +1,7 @@
 import tkinter
 import os
 from PIL import ImageTk, Image
+from speechsdk import StartConversation
 
 #
 #Actual window        
@@ -29,10 +30,10 @@ lbl2.place(relx = .5, rely = .90, anchor='c')
 # function for button press action
 def clicked():
     lbl2.configure(text = "I'm listening..")
-    import speechsdk
+    StartConversation()
 
 # create first button
-btn1 = tkinter.Button(window, text = "Yes!", command = clicked())
+btn1 = tkinter.Button(window, text = "Yes!", command = clicked)
 btn1.place(relx = .5, rely = .95, anchor='c')
 
 # exitbutton = tkinter.Button(text = 'Exit Game', command = quit, height = 5, 

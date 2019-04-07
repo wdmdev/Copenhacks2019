@@ -39,12 +39,12 @@ def getWikiData(freq_keyword,all_keywords,version):
 #        print(wikiPageData.content)
         
         print('Title of best match: ',title)
-        return title,keywords
+        return title,all_keywords
     else:
-        return wikiPages[freq_keyword.values()[0]],keywords
+        return wikiPages[freq_keyword.values()[0]],all_keywords
 
 
-def covarianceDocKey(document,keywords, freq_keyword):
+def covarianceDocKey(document,keywords, freq_keywords):
     #Get the keyphrases
     #I need the counts from the first input 
     vektor_transcript = np.zeros((len(keywords)))
@@ -124,71 +124,71 @@ def most_freq_keyword(transcript,keywords):
 #            n+= 1
     return dict(zip(new_keywords, temp[:n]))
 #keywords = ['dog','dog','cat','dog','c','dog','r','e','q','e','q','p']
-keywords = [
-        "opera performances",
-        "term opera house",
-        "public opera house",
-        "world's oldest working opera house",
-        "large number of working opera houses",
-        "Early United States opera houses",
-        "Teatro Massimo",
-        "Teatro San Cassiano",
-        "wealthy people",
-        "large performing-arts center",
-        "theatre building",
-        "patronage system",
-        "Italy",
-        "operas",
-        "centuries",
-        "supported system",
-        "larger performing arts centers",
-        "San Carlo",
-        "ordinary people",
-        "theatre companies",
-        "social position",
-        "wealthy patrons",
-        "term of prestige",
-        "capitalist social forms",
-        "cities",
-        "Naples",
-        "variety of functions",
-        "ticket sales",
-        "audience seating",
-        "towns",
-        "institutional grants",
-        "backstage facilities",
-        "hosting community dances",
-        "fairs",
-        "combination of government",
-        "century",
-        "rulers",
-        "orchestra pit",
-        "Henry Purcell",
-        "rise of bourgeois",
-        "funds",
-        "costumes",
-        "European culture",
-        "political ambition",
-        "Palermo",
-        "London",
-        "Scala",
-        "private donations",
-        "nobles",
-        "Venice",
-        "country",
-        "Germany",
-        "musical events",
-        "vaudeville",
-        "Milan",
-        "Hamburg",
-        "contrast",
-        "venues"
-      ]
-transcript = 'An opera house is a theatre building used for opera performances that consists of a stage, an orchestra pit, audience seating, and backstage facilities for costumes and set building.'
-freq_keywords = most_freq_keyword(transcript,keywords)
-
-#version 0 = simple, no covariance between keywords and documents. version = 1, covariance is calculated.
-version = 1
-docs = getWikiData(freq_keywords,keywords,version)
-#print(docs)
+#keywords = [
+#        "opera performances",
+#        "term opera house",
+#        "public opera house",
+#        "world's oldest working opera house",
+#        "large number of working opera houses",
+#        "Early United States opera houses",
+#        "Teatro Massimo",
+#        "Teatro San Cassiano",
+#        "wealthy people",
+#        "large performing-arts center",
+#        "theatre building",
+#        "patronage system",
+#        "Italy",
+#        "operas",
+#        "centuries",
+#        "supported system",
+#        "larger performing arts centers",
+#        "San Carlo",
+#        "ordinary people",
+#        "theatre companies",
+#        "social position",
+#        "wealthy patrons",
+#        "term of prestige",
+#        "capitalist social forms",
+#        "cities",
+#        "Naples",
+#        "variety of functions",
+#        "ticket sales",
+#        "audience seating",
+#        "towns",
+#        "institutional grants",
+#        "backstage facilities",
+#        "hosting community dances",
+#        "fairs",
+#        "combination of government",
+#        "century",
+#        "rulers",
+#        "orchestra pit",
+#        "Henry Purcell",
+#        "rise of bourgeois",
+#        "funds",
+#        "costumes",
+#        "European culture",
+#        "political ambition",
+#        "Palermo",
+#        "London",
+#        "Scala",
+#        "private donations",
+#        "nobles",
+#        "Venice",
+#        "country",
+#        "Germany",
+#        "musical events",
+#        "vaudeville",
+#        "Milan",
+#        "Hamburg",
+#        "contrast",
+#        "venues"
+#      ]
+#transcript = 'An opera house is a theatre building used for opera performances that consists of a stage, an orchestra pit, audience seating, and backstage facilities for costumes and set building.'
+#freq_keywords = most_freq_keyword(transcript,keywords)
+#
+##version 0 = simple, no covariance between keywords and documents. version = 1, covariance is calculated.
+#version = 1
+#docs = getWikiData(freq_keywords,keywords,version)
+##print(docs)
 
