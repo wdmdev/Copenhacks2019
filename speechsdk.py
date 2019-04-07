@@ -170,9 +170,8 @@ whlie KimActive == True:
             if SCKR.precision <= 0.1:
                 Question.GenerateNegativeElaboration():
             else:
+                Question.GenerateAppraise()
                 break
-
-Question.GenerateAppraise()
                 
     
 
