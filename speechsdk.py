@@ -5,6 +5,8 @@ from pprint import pprint
 # pprint is pretty print (formats the JSON)
 from IPython.display import HTML
 import settings
+import Question
+import getWikiData
 
 
 ### Speech recognition
@@ -34,11 +36,11 @@ elif result.reason == speechsdk.ResultReason.Canceled:
     print("Speech Recognition canceled: {}".format(cancellation_details.reason))
     if cancellation_details.reason == speechsdk.CancellationReason.Error:
         print("Error details: {}".format(cancellation_details.error_details))
-      
+        
 KimText = result.text
 
 ### Text analytics - Key Phrases
-        
+
 subscription_key = settings.getSetting('text_key')
 assert subscription_key
 
@@ -64,14 +66,15 @@ for document in key_phrases["documents"]:
 HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
 
 # Send information to Kim
+k_ph = key_phrases["documents"][0]["keyPhrases"]
 
-
-
+if len(k_ph) > 0:
+    top_keywords = getWikiData.most_freq_keyword(k_ph)
+    top_doc = getWikiData.getWikiData(top_keywords, k_ph,1)
 
 # Recieve information from Kim
-
-
-
+if top_doc != '':
+    Question.GenerateQuestion(top_keywords, top_doc)
 
 # Elaborate, evaluate and start conversation
 

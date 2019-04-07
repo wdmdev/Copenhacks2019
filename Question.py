@@ -4,7 +4,7 @@ from xml.etree import ElementTree
 import playsound as ps
 import settings
 
-subscription_key = settings.getSetting('sub_key')
+subscription_key = settings.getSetting('speech_key')
 access_token = ''
 
 def __get_token():
@@ -62,6 +62,6 @@ def GenerateQuestion(keywords, document):
         print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
 
 
-kw = ['linear regression','korea','Ford']
-d = 'I know that Korea is using linear regression to take over Ford'
-GenerateQuestion(kw, d)
+#kw = ['linear regression','korea','Ford']
+#d = 'I know that Korea is using linear regression to take over Ford'
+#GenerateQuestion(kw, d)
