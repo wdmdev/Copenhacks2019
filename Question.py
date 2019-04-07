@@ -3,9 +3,13 @@ import os, requests, time
 from xml.etree import ElementTree
 import playsound as ps
 import settings
+import requests as req
+import wikipediaapi as wikiapi
+import numpy as np
 
 subscription_key = settings.getSetting('speech_key')
 access_token = ''
+wiki = wikiapi.Wikipedia('en')
 
 def __get_token():
     fetch_token_url = "https://northeurope.api.cognitive.microsoft.com/sts/v1.0/issuetoken"
@@ -15,21 +19,14 @@ def __get_token():
     response = requests.post(fetch_token_url, headers=headers)
     return str(response.text)
 
-def __chooseQuestionWord(keywords,document):
-    verbs = np.array(['is','describe','are'])
+def __chooseQuestionWord(pageTitle, keywords):
+    sections = [s for s in wiki.page(pageTitle).sections]
+    sectionTitles = [s.title for s in sections if any(k in s.text for k in keywords)]
+    return sectionTitles[np.random.randint(0,len(sectionTitles)-1)] if len(sectionTitles) > 0 else keywords[0]
 
-    k_score = np.zeros(len(keywords))
-
-    for i, k in enumerate(keywords):
-        for v in verbs:
-            k_score[i] += document.count('{0} {1}'.format(k,v))
-
-    return keywords[np.argmax(k_score)]
-
-def GenerateQuestion(keywords, document):
-    question = '''I heard something about {0},
-    could you maybe explain that to me?
-    '''.format(__chooseQuestionWord([k.lower() for  k in keywords], document.lower()))
+def GenerateQuestion(pageTitle, keywords):
+    question = '''Could you explain the {0} of {1} to me?'''.format(
+        __chooseQuestionWord(pageTitle, keywords), pageTitle)
     access_token = __get_token()
     timestr = time.strftime("%Y%m%d-%H%M")
 
