@@ -6,8 +6,6 @@ Created on Sat Apr  6 15:35:49 2019
 @author: Yssubhi
 """
 
-top_doc = ''
-
 import azure.cognitiveservices.speech as speechsdk
 import time
 import requests
@@ -17,7 +15,6 @@ from IPython.display import HTML
 import settings
 import Question
 import getWikiData
-import similaritychecker as SCKR
 
 
 ### Speech recognition
@@ -80,7 +77,9 @@ HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".
 k_ph = key_phrases["documents"][0]["keyPhrases"]
 
 if len(k_ph) > 0:
-    top_keywords = getWikiData.most_freq_keyword(k_ph)
+    print('KimText')
+    print(KimText)
+    top_keywords = getWikiData.most_freq_keyword(KimText,k_ph)
     top_doc = getWikiData.getWikiData(top_keywords, k_ph,1)
 
 # Recieve information from Kim
@@ -149,6 +148,8 @@ with open (txtfile, "r") as readtext:
     
 numWords = len(txtdata.split())
 i = 1
+
+import similaritychecker as SCKR
 
 KimActive = True
 if numWords >= 100:
