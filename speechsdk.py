@@ -123,3 +123,8 @@ for document in key_phrases["documents"]:
 HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
 
 # Turn KimConversation into learned information
+# Create or open txt file with topic name
+txtfile = open(top_doc + ".txt","w+")
+
+with open(txtfile) as appendtext:
+    appendtext.write(KimConversation)
