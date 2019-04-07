@@ -54,4 +54,4 @@ for document in key_phrases["documents"]:
     table.append("<tr><td>{0}</td><td>{1}</td>".format(text, phrases))
 HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
 
-print(similar(KimText,CurriculumText))
+precision similar(KimText,CurriculumText)
