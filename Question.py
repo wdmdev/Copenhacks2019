@@ -6,6 +6,7 @@ import settings
 import requests as req
 import wikipediaapi as wikiapi
 import numpy as np
+import ResponseGen as RG
 
 subscription_key = settings.getSetting('speech_key')
 access_token = ''
@@ -25,7 +26,7 @@ def __chooseQuestionWord(pageTitle, keywords):
     return sectionTitles[np.random.randint(0,len(sectionTitles)-1)] if len(sectionTitles) > 0 else keywords[0]
 
 def GenerateQuestion(pageTitle, keywords):
-    question = '''Could you explain the {0} of {1} to me?'''.format(
+    question = RG.question_format.format(
         __chooseQuestionWord(pageTitle, keywords), pageTitle)
     access_token = __get_token()
     timestr = time.strftime("%Y%m%d-%H%M")
@@ -59,7 +60,7 @@ def GenerateQuestion(pageTitle, keywords):
         print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
         
 def GenerateNegativeElaboration():
-    elaborate_n = '''Hmm, could you elaborate on that?'''
+    elaborate_n = RG.elaborate_format
     
     base_url = 'https://northeurope.tts.speech.microsoft.com/'
     path = 'cognitiveservices/v1'
@@ -90,7 +91,7 @@ def GenerateNegativeElaboration():
         print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
 
 def GenerateAppraise():
-    appraise = '''Cool!'''
+    appraise = RG.appraise_format
     
     base_url = 'https://northeurope.tts.speech.microsoft.com/'
     path = 'cognitiveservices/v1'

@@ -47,8 +47,19 @@ def covarianceDocKey(document,keywords):
             keyword_count[keywords.index(word)]+=1
     return np.matmul(keyword_count,random_genKeyCount.T)
 
-def most_freq_keyword(keywords):
-    words, count = np.unique(keywords, return_counts=True)
+def most_freq_keyword(transcript,keywords):
+    words, count = np.unique(transcript, return_counts=True)
+    
+    beforeSort = np.copy(words)
+    print("BeforeSort",beforeSort)
+    for i, word in enumerate(words):
+        if word not in keywords:
+            words = np.delete(words,i,1)
+            count = np.delete(count,i,1)
+    print("After filtering: ",words,count)
+            
+         
+            
     max_counts = np.sort(count)[::-1]
 
     new_keywords = []
