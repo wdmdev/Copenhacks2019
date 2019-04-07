@@ -38,7 +38,7 @@ key_phrase_api_url = text_analytics_base_url + "keyPhrases"
 print(key_phrase_api_url)
 
 documents = {'documents' : [
-  {'id': '1', 'text': KimText},
+  {'id': '1', 'text': ssdk.KimText},
   {'id': '2', 'text': CurriculumText}
 ]}
 
@@ -54,4 +54,4 @@ for document in key_phrases["documents"]:
     table.append("<tr><td>{0}</td><td>{1}</td>".format(text, phrases))
 HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
 
-precision similar(KimText,CurriculumText)
+precision = similar(ssdk.KimText,CurriculumText)

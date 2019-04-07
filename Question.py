@@ -57,5 +57,3 @@ def GenerateQuestion(pageTitle, keywords):
         os.remove(path)
     else:
         print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
-
-GenerateQuestion('Linear regression', ['math', 'matrix', 'line'])

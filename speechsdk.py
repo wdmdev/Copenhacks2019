@@ -61,7 +61,7 @@ pprint(key_phrases)
 
 table = []
 for document in key_phrases["documents"]:
-    text    = next(filter(lambda d: d["id"] == document["id"], documents["documents"]))["text"]    
+    text    = next(filter(lambda d: d["id"] == document["id"], documents["documents"]))["text"]
     phrases = ",".join(document["keyPhrases"])
     table.append("<tr><td>{0}</td><td>{1}</td>".format(text, phrases))
 HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
@@ -121,13 +121,15 @@ def AnalyzeSome():
     HTML("<table><tr><th>Text</th><th>Key phrases</th></tr>{0}</table>".format("\n".join(table)))
     
 # KimConversation is the stored information from conversations
+txtfile = open(top_doc + ".txt","w+")
+KimConversation = result.text
+KimText = result.text
     
-def StoreSome:
+def StoreSome():
     KimConversation = result.text
     KimText = result.text
     # Turn KimConversation into learned information
     # Create or open txt file with topic name
-    txtfile = open(top_doc + ".txt","w+")
     
     with open(txtfile) as appendtext:
         appendtext.write(KimConversation)
@@ -138,6 +140,7 @@ with open (txtfile, "r") as readtext:
 numWords = len(txtdata.split())
 i = 10
 
+KimActive = True
 if numWords >= 100:
     if SCKR.precision >= 0.5:
         KimActive == False
@@ -146,13 +149,13 @@ if numWords >= 100:
     else:
         KimActive == True
             
-whlie KimActive == True:
+while KimActive:
     # talk to Kim
     SaySome()
     # save input
     StoreSome()
     # Analyse input
-    AnalyseSome()
+    AnalyzeSome()
     # get new question
     if top_doc != '':
         Question.GenerateQuestion(top_keywords, top_doc)
