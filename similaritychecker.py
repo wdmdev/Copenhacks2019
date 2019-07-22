@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Apr  7 07:30:47 2019
-
-@author: Yssubhi
-"""
-
 import speechsdk as ssdk
 import getWikiData as gWD
 import numpy as np

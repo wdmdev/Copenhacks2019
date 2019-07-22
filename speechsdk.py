@@ -1,16 +1,9 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Apr  6 15:35:49 2019
-
-@author: Yssubhi
-"""
 
 import azure.cognitiveservices.speech as speechsdk
 import time
 import requests
-from pprint import pprint
-# pprint is pretty print (formats the JSON)
+from pprint import pprint # pprint is pretty print (formats the JSON)
 from IPython.display import HTML
 import settings
 import Question
@@ -31,8 +24,6 @@ def StartConversation():
     
     
     result = speech_recognizer.recognize_once()
-    # time.sleep(5)
-    # speech_recognizer.stop_continuous_recognition()
     
     # Checks result.
     if result.reason == speechsdk.ResultReason.RecognizedSpeech:
