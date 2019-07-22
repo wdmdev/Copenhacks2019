@@ -7,6 +7,7 @@ import requests as req
 import wikipediaapi as wikiapi
 import numpy as np
 import ResponseGen as RG
+from os.path import join
 
 subscription_key = settings.getSetting('speech_key')
 access_token = ''
@@ -56,7 +57,7 @@ def GenerateQuestion(pageTitle, keywords):
 
     response = requests.post(constructed_url, headers=headers, data=body)
     if response.status_code == 200:
-        path = 'sample-' + timestr + '.wav'
+        path = r'' + join(os.getcwd(), 'sample-' + timestr + '.wav')
         with open(path, 'wb') as audio:
             audio.write(response.content)
             ps.playsound(path)
@@ -87,7 +88,7 @@ def GenerateNegativeElaboration():
     response = requests.post(constructed_url, headers=headers, data=body)
     print(response.content)
     if response.status_code == 200:
-        path = 'sample-' + timestr + '.wav'
+        path = r'' + join(os.getcwd(), 'sample-' + timestr + '.wav')
         with open(path, 'wb') as audio:
             audio.write(response.content)
             ps.playsound(path)
@@ -118,7 +119,7 @@ def GenerateAppraise():
     response = requests.post(constructed_url, headers=headers, data=body)
     print(response.content)
     if response.status_code == 200:
-        path = 'sample-' + timestr + '.wav'
+        path = r'' + join(os.getcwd(), 'sample-' + timestr + '.wav')
         with open(path, 'wb') as audio:
             audio.write(response.content)
             ps.playsound(path)
